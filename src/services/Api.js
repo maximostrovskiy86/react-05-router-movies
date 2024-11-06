@@ -27,4 +27,19 @@ export const fetchGetSearchMovies = async (keyword) => {
 	return await response.json();
 }
 
+export const fetchGetMovieById = async (movieId) => {
+	const options = {
+		method: 'GET',
+		headers: {
+			accept: 'application/json',
+			Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4MWMwOTAyNWI0YTUwMDMwN2FlMjZjODkzZjM5YzMzNyIsIm5iZiI6MTczMDc5OTY3NC40MjYyNTA3LCJzdWIiOiI2MzYzZjEwZTA5MWU2MjAwN2ExYWVhODkiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.eJI9gXbsupneV2VUEkdd0MWxatfvPJUOms0Ngmx8yYM'
+		}
+	};
+	
+	console.log("movieId", movieId)
+	
+	const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}?language=en-US`, options);
+	return response.json();
+}
+
 

@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from "react";
 import {fetchGetTrendingMovies} from "../../services/Api";
 import {HomeStyle} from "./Home.styled";
+import {Link} from "react-router-dom";
+import PageHeading from "../../components/pageHeading";
 
 
 const Home = () => {
@@ -17,9 +19,17 @@ const Home = () => {
 	
 	return (
 		<HomeStyle>
+			<PageHeading text="Trending today"/>
+			
 			{movies.results && (
 				<ul>
-					{movies.results.map(movie => (<li key={movie.id}>{movie.original_title}</li>))}
+					{movies.results.map(movie => (
+						<li key={movie.id}>
+							<Link to={`/movies/${movie.id}`}>
+								{movie.original_title}
+							</Link>
+						</li>
+					))}
 				</ul>
 			)}
 		</HomeStyle>

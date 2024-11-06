@@ -5,6 +5,7 @@ import Navigation from './navigation';
 import Movies from "../pages/movies";
 import NotFound from "../pages/NotFound";
 import React from "react";
+import MovieDetails from "../pages/movieDetails";
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
 			<Routes>
 				<Route path="/" element={<Home/>}/>
 				<Route path="/movies" element={<Movies/>}/>
+				<Route path="/movies/:movieId" element={<MovieDetails />}/>
 				<Route path="*" element={<NotFound/>}/>
 			</Routes>
 		</Container>
