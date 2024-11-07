@@ -15,7 +15,7 @@ const Home = () => {
 			.catch(err => console.error(err));
 	}, [])
 	
-	console.log("movies", movies.results)
+	// console.log("movies", movies.results)
 	
 	return (
 		<HomeStyle>

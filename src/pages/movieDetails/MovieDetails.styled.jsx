@@ -1,6 +1,24 @@
 import styled from '@emotion/styled';
 
-export const MoviesDetailsWrapper = styled.main`
+export const MoviesDetailsWrapper = styled.section`
 	display: flex;
-	//background-color: #00bcd5;
+	img {
+		max-width: 300px;
+	}
+	.description {
+        margin-left: 20px;
+    }
+    
+    .genres {
+        display: flex;
+        li + li {
+            margin-left: 10px;
+        }
+    }
+
+`
+
+
+export const MovieAdditionalDetails = styled.section`
+display: flex;
 `
