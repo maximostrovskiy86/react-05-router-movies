@@ -1,17 +1,17 @@
 import {useState, useEffect} from "react";
 import {Link, useParams, Outlet} from "react-router-dom";
-import {fetchGetMovieById} from "../../services/Api";
+import {fetchGetMovieById, fetchGetByMovieCast, fetchGetByMovieReviews} from "../../services/Api";
 import {MoviesDetailsWrapper, MovieAdditionalDetails} from "./MovieDetails.styled";
-import noPhoto from "../../images/nophoto.jpeg";
+import noImage from "../../images/noImage.jpg";
 
-const MovieDetails = () => {
+const MovieDetails = ({setCast, setReviews}) => {
 	const [movieData, setMovieData] = useState({});
 	const {movieId} = useParams();
 	
 	useEffect(() => {
-		fetchGetMovieById(movieId).then(result => {
-			setMovieData(result)
-		}).catch(error => console.log(error))
+		fetchGetMovieById(movieId).then(result => setMovieData(result)).catch(error => console.log(error))
+		fetchGetByMovieCast(movieId).then(result => setCast(result)).catch(error => console.log(error))
+		fetchGetByMovieReviews(movieId).then(result => setReviews(result)).catch(error => console.log(error))
 	}, [])
 	
 	console.log('movieData', movieData)
@@ -23,7 +23,7 @@ const MovieDetails = () => {
 			{movieData && (
 				<>
 					<MoviesDetailsWrapper>
-						<img src={poster_path ? `https://image.tmdb.org/t/p/w500/${poster_path}` : noPhoto}
+						<img src={poster_path ? `https://image.tmdb.org/t/p/w500/${poster_path}` : noImage}
 							 alt={title}/>
 						<div className='description'>
 							<h2>{original_title}</h2>
@@ -37,10 +37,10 @@ const MovieDetails = () => {
 						</div>
 					</MoviesDetailsWrapper>
 					<MovieAdditionalDetails>
-						{/*<ul>*/}
-						{/*	<Link to={`/${movieId}/cast`}>Cast</Link>*/}
-						{/*	<Link >Reviews</Link>*/}
-						{/*</ul>*/}
+						<ul>
+							<li><Link to='cast'>Cast</Link></li>
+							<li><Link to='reviews'>Reviews</Link></li>
+						</ul>
 						<Outlet/>
 					</MovieAdditionalDetails>
 				</>
