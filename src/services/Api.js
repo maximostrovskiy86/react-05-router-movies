@@ -36,9 +36,30 @@ export const fetchGetMovieById = async (movieId) => {
 		}
 	};
 	
-	console.log("movieId", movieId)
-	
 	const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}?language=en-US`, options);
+	return response.json();
+}
+
+export const fetchGetByMovieCast = async (movieId) => {
+	
+	const params = new URLSearchParams({
+		'language': 'en-US',
+		'api_key': API_KEY,
+	});
+
+	const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/credits?${params}` , {
+		headers: {accept: 'application/json'}
+	})
+	
+	return response.json();
+}
+
+export const fetchGetByMovieReviews = async (movieId) => {
+	
+	const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/reviews?language=en-US&api_key=${API_KEY}` , {
+		headers: {accept: 'application/json'}
+	})
+	
 	return response.json();
 }
 
